@@ -5,7 +5,7 @@ namespace WebApp.Services;
 
 public class FileService
 {
-    private String FilesDir => Path.Combine(Directory.GetCurrentDirectory(), "Files");
+    private string FilesDir => Path.Combine(Directory.GetCurrentDirectory(), "Files");
     private readonly NpgsqlConnection _npgsqlConnection;
 
     public FileService(NpgsqlConnection npgsqlConnection)
@@ -39,7 +39,7 @@ public class FileService
         return File.Create(Path.Combine(folderpath, filename));
     }
 
-    public async Task<(FileStream file, String filename)> ReadFileAsync(int id)
+    public async Task<(FileStream file, string filename)> ReadFileAsync(int id)
     {
         var readname = await GetFileNameById(id);
         if (string.IsNullOrWhiteSpace(readname))
@@ -51,10 +51,10 @@ public class FileService
         return (file, readname);
     }
 
-    private async Task<String> GetFileNameById(int id)
+    private async Task<string> GetFileNameById(int id)
     {
         await _npgsqlConnection.OpenAsync();
-        return await _npgsqlConnection.ExecuteScalarAsync<String>(@"
+        return await _npgsqlConnection.ExecuteScalarAsync<string>(@"
     select file_name from files where id=@id;
     ", new { id = id });
     }

@@ -1,0 +1,23 @@
+﻿@page
+@model WebApp.View.Download
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+            <meta charset="UTF-8">
+            <title>Страница загрузки</title>
+     </head>
+    <body>
+        <form action="Download.html" method='post'>
+            <label>ID:</label><br />
+            <input type='number' id='id' /><br />
+            <label>Filename:</label><br />
+            <input type='text' name='filname' /><br />
+            <input type='submit' value='Загрузить' />
+        </form>
+    </body>
+</html>
